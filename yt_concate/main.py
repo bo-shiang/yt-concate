@@ -1,5 +1,8 @@
+resp = {"Employees": {{name: "a", "tel": "1234"}, {name: "b", "tel": "5678"}}}
 
-resp = 
+for i in resp["Employee"]:
+    print(i)
+
 
 # import urllib.request
 # import json
@@ -22,7 +25,7 @@ resp =
 
 #     video_links = []
 #     url = first_url
-    
+
 #     while True:
 #         inp = urllib.request.urlopen(url)
 #         resp = json.load(inp)
