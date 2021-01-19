@@ -1,6 +1,6 @@
 import urllib.request
 import json
-from yt_concate.settings import API_KEY
+from .API import API_KEY
 
 # CHANNEL_ID = "UCKSVUHI9rbbkXhvAXK-2uxA"
 print(API_KEY)
