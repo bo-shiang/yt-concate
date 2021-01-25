@@ -11,8 +11,9 @@ class Pipeline:
 
     def run(self, inputs):
         for step in self.steps:
+            data = None
             try:
-                step.process(inputs)
+                data = step.process(data, inputs)
             except StepException as e:
                 print("Exception:", e)
                 break

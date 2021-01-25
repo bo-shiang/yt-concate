@@ -11,7 +11,7 @@ from yt_concate.pipeline.steps.step import StepException
 
 
 class GetVideoList(Step):
-    def process(self, inputs):
+    def process(self, data, inputs):
         channel_id = inputs["channel_id"]
         api_key = SECRET_KEY
         base_video_url = "https://www.youtube.com/watch?v="
