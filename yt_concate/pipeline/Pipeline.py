@@ -1,7 +1,4 @@
-import sys
-
-sys.path.append("/Users/Shiang/Desktop/yt-concate")
-
+from yt_concate.pipeline.steps.step import Step
 from yt_concate.pipeline.steps.step import StepException
 
 
@@ -10,10 +7,11 @@ class Pipeline:
         self.steps = steps
 
     def run(self, inputs):
+        data = None
         for step in self.steps:
-            data = None
             try:
                 data = step.process(data, inputs)
             except StepException as e:
                 print("Exception:", e)
                 break
+        print(data)

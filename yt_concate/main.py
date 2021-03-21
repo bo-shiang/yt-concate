@@ -1,10 +1,6 @@
-import sys
-
-sys.path.append("/Users/Shiang/Desktop/yt-concate")
-
-from yt_concate.pipeline.steps.get_video_list import GetVideoList
 from yt_concate.pipeline.steps.step import StepException
-
+from yt_concate.pipeline.steps.get_video_list import GetVideoList
+from yt_concate.pipeline.steps.download_caption import DownloadCaptions
 from yt_concate.pipeline.Pipeline import Pipeline
 
 CHANNEL_ID = "UCKSVUHI9rbbkXhvAXK-2uxA"
@@ -15,6 +11,7 @@ def main():
 
     steps = [
         GetVideoList(),
+        DownloadCaptions(),
     ]
 
     p = Pipeline(steps)

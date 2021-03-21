@@ -1,7 +1,3 @@
-import sys
-
-sys.path.append("/Users/Shiang/Desktop/yt-concate")
-
 import urllib.request
 import json
 
@@ -40,4 +36,5 @@ class GetVideoList(Step):
                 url = first_url + "&pageToken={}".format(next_page_token)
             except KeyError:
                 break
+        print(video_links)    
         return video_links
