@@ -1,6 +1,6 @@
 import urllib.request
 import json
-
+import time
 from yt_concate.settings import SECRET_KEY
 from yt_concate.pipeline.steps.step import Step
 from yt_concate.pipeline.steps.step import StepException
@@ -11,7 +11,8 @@ class GetVideoList(Step):
         channel_id = inputs["channel_id"]
 
         if utils.video_list_file_exists(channel_id):
-            return self.read_file(utils.get_video_list_filepath())
+            print("Fund existing video list file for channel id", channel_id)
+            return self.read_file(utils.get_video_list_filepath(channel_id))
 
         api_key = SECRET_KEY
         base_video_url = "https://www.youtube.com/watch?v="
@@ -30,7 +31,6 @@ class GetVideoList(Step):
         while True:
             inp = urllib.request.urlopen(url)
             resp = json.load(inp)
-
             for i in resp["items"]:
                 if i["id"]["kind"] == "youtube#video":
                     video_links.append(base_video_url + i["id"]["videoId"])
@@ -42,16 +42,17 @@ class GetVideoList(Step):
                 break
         print(video_links)
         self.write_to_file(video_links, utils.get_video_list_filepath(channel_id))
+
         return video_links
 
     def write_to_file(self, video_links, filepath):
         with open(filepath, "w") as f:
             for url in video_links:
                 f.write(url + "\n")
-    
+
     def read_file(self, filepath):
         video_links = []
-         with open(filepath, "r") as f:
+        with open(filepath, "r") as f:
             for url in f:
                 video_links.append(url.strip())
         return video_links
